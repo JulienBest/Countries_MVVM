@@ -6,11 +6,12 @@ import java.util.LinkedList;
 import java.util.List;
 import tubs.musictinder.country_mvvm_own.model.Country;
 
-public class ListViewModel extends ViewModel {
-    MutableLiveData<List<Country>> countries = new MutableLiveData<>(); //all the countrie objects
-    MutableLiveData<Boolean> countryLoadError = new MutableLiveData<>(); //If there was an error loading the data
-    MutableLiveData<Boolean> loading = new MutableLiveData<>(); //Whether the view model is loading the data
+public class ListViewModel extends ViewModel implements tubs.musictinder.country_mvvm_own.viewmodel.ViewModel {
+    private MutableLiveData<List<Country>> countries = new MutableLiveData<>(); //all the countrie objects
+    private MutableLiveData<Boolean> countryLoadError = new MutableLiveData<>(); //If there was an error loading the data
+    private MutableLiveData<Boolean> loading = new MutableLiveData<>(); //Whether the view model is loading the data
 
+    @Override
     public void refresh() {
         fetchCountries();
     }

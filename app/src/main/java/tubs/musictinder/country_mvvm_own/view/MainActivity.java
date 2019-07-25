@@ -16,10 +16,11 @@ import java.util.ArrayList;
 import tubs.musictinder.country_mvvm_own.R;
 import tubs.musictinder.country_mvvm_own.model.Country;
 import tubs.musictinder.country_mvvm_own.viewmodel.ListViewModel;
+import tubs.musictinder.country_mvvm_own.viewmodel.ViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ListViewModel listViewModel;
+    private ViewModel listViewModel;
     private CountryListAdapter countryListAdapter;
     private RecyclerView recyclerView;
 
@@ -55,9 +56,7 @@ public class MainActivity extends AppCompatActivity {
             if (countries != null) countryListAdapter.updateCountries(countries);
         });
 
-        listViewModel.getCountryLoadError().observe(this, error -> {
-            errorText.setVisibility(error ? View.VISIBLE : View.GONE);
-        });
+        listViewModel.getCountryLoadError().observe(this, error -> errorText.setVisibility(error ? View.VISIBLE : View.GONE));
 
         listViewModel.getLoading().observe(this, loading -> {
             loadingSpinner.setVisibility(loading ? View.VISIBLE : View.GONE);
