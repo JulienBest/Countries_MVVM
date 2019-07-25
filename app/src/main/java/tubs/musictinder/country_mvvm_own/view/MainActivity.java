@@ -14,7 +14,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import java.util.ArrayList;
 
 import tubs.musictinder.country_mvvm_own.R;
-import tubs.musictinder.country_mvvm_own.model.Country;
 import tubs.musictinder.country_mvvm_own.viewmodel.ListViewModel;
 import tubs.musictinder.country_mvvm_own.viewmodel.ViewModel;
 
@@ -53,7 +52,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void observeViewModel() {
         listViewModel.getCountries().observe(this, countries -> {
-            if (countries != null) countryListAdapter.updateCountries(countries);
+            if (countries != null) {
+                countryListAdapter.updateCountries(countries);
+                recyclerView.setVisibility(View.VISIBLE);
+            }
         });
 
         listViewModel.getCountryLoadError().observe(this, error -> errorText.setVisibility(error ? View.VISIBLE : View.GONE));
