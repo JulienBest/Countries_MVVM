@@ -5,10 +5,13 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
+import tubs.musictinder.country_mvvm_own.di.DaggerCountryServiceComponent;
 import tubs.musictinder.country_mvvm_own.model.CountriesService;
 import tubs.musictinder.country_mvvm_own.model.Country;
 
@@ -17,8 +20,14 @@ public class ListViewModel extends ViewModel implements tubs.musictinder.country
     private MutableLiveData<Boolean> countryLoadError = new MutableLiveData<>(); //If there was an error loading the data
     private MutableLiveData<Boolean> loading = new MutableLiveData<>(); //Whether the view model is loading the data
 
-    private CountriesService countriesService = new CountriesService();
     private CompositeDisposable disposable = new CompositeDisposable();
+
+    @Inject
+    CountriesService countriesService;
+
+    public ListViewModel() {
+        DaggerCountryServiceComponent.create().inject(this);
+    }
 
     @Override
     public void refresh() {
