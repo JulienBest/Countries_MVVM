@@ -1,6 +1,5 @@
 package tubs.musictinder.country_mvvm_own.view;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

@@ -2,23 +2,18 @@ package tubs.musictinder.country_mvvm_own.model;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.Single;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
+import tubs.musictinder.country_mvvm_own.di.DaggerAPIComponent;
 
 public class CountriesService {
-    private final String BASE_URL = "https://raw.githubusercontent.com";
-    private CountriesAPI countriesAPI;
+
+    @Inject
+    CountriesAPI countriesAPI;
 
     public CountriesService() {
-        Retrofit.Builder builder = new Retrofit.Builder();
-        countriesAPI = builder
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())  //Makes the Country Objects observable
-                .build()
-                .create(CountriesAPI.class);
+        DaggerAPIComponent.create().inject(this);
     }
 
     public Single<List<Country>> getCountries() {
